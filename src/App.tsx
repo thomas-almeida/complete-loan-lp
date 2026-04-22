@@ -59,37 +59,36 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4">
       <header className="flex items-center gap-2 mb-8">
-        <div className="bg-blue-600 p-2 rounded-lg">
-          <Landmark className="text-white w-6 h-6" />
+        <div className="bg-green-600 p-4 rounded-tr-2xl rounded-bl-2xl shadow-lg w-12 h-4"></div>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">SB Financeira</h1>
+          <p className='text-xs'>Sua Solução Financeira de Pagamentos</p>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800"></h1>
       </header>
 
       <main className="w-full max-w-md">
         {/* Progress Bar */}
         <div className="mb-8 flex justify-between relative">
           <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2 -z-10" />
-          <div 
-            className="absolute top-1/2 left-0 h-0.5 bg-blue-600 -translate-y-1/2 -z-10 transition-all duration-500" 
+          <div
+            className="absolute top-1/2 left-0 h-0.5 bg-green-600 -translate-y-1/2 -z-10 transition-all duration-500"
             style={{ width: `${(currentStepIndex / (stepOrder.length - 1)) * 100}%` }}
           />
           {stepOrder.map((s, idx) => (
-            <div 
+            <div
               key={s}
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
-                idx <= currentStepIndex ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
-              }`}
+              className={`w-22 h-1 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${idx <= currentStepIndex ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}
             >
-              {idx + 1}
             </div>
           ))}
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-blue-600 py-4 px-6">
+          <div className="bg-green-600 py-4 px-6">
             <h2 className="text-white font-semibold text-lg">{steps[step].title}</h2>
           </div>
-          
+
           <div className="p-6">
             <AnimatePresence mode="wait">
               {isAnalyzing ? (
@@ -101,8 +100,8 @@ const App: React.FC = () => {
                   className="py-12 flex flex-col items-center text-center gap-4"
                 >
                   <div className="relative">
-                    <Loader2 className="w-16 h-16 text-blue-600 animate-spin" />
-                    <ShieldCheck className="w-6 h-6 text-blue-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                    <Loader2 className="w-16 h-16 text-green-600 animate-spin" />
+                    <ShieldCheck className="w-6 h-6 text-green-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-xl font-bold text-gray-800">Analisando Perfil...</h3>
@@ -126,7 +125,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="mt-8 text-center text-gray-500 text-sm">
-        <p>&copy; 2026 - Todos os direitos reservados.</p>
+        <p>&copy; SB Financeira 2026 - Todos os direitos reservados.</p>
         <p className="mt-1">Correspondente bancário autorizado.</p>
       </footer>
     </div>

@@ -44,7 +44,7 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
 
       <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-left space-y-4">
         <h4 className="font-semibold text-gray-700 flex items-center gap-2 border-b pb-2">
-          <FileText size={18} className="text-blue-600" /> Resumo da Proposta
+          <FileText size={18} className="text-green-600" /> Resumo da Proposta
         </h4>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
@@ -68,13 +68,13 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
         <div className="flex gap-3">
           <button
             onClick={handlePreview}
-            className="flex-1 border-2 border-blue-100 hover:border-blue-200 text-blue-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+            className="flex-1 border-2 border-green-100 hover:border-green-200 text-green-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
           >
             <FileText size={18} /> Visualizar
           </button>
           <button
             onClick={handleDownload}
-            className="flex-1 border-2 border-blue-100 hover:border-blue-200 text-blue-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+            className="flex-1 border-2 border-green-100 hover:border-green-200 text-green-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
           >
             <Download size={18} /> Baixar
           </button>
@@ -82,7 +82,7 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
 
         <button
           onClick={onNext}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all animate-bounce-slow"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all animate-bounce-slow"
         >
           <PenTool size={20} /> Assinar Contrato e Finalizar
         </button>

@@ -83,7 +83,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ onNext, initialData }) => {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors mt-4"
+        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors mt-4"
       >
         Simular Agora
       </button>

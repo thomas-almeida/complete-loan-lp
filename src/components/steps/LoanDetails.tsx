@@ -36,7 +36,7 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
       <div className="space-y-2">
         <label className="text-sm font-medium text-gray-700 flex justify-between">
           <span className="flex items-center gap-2"><DollarSign size={16} /> Valor Pretendido</span>
-          <span className="font-bold text-blue-600">R$ {amount.toLocaleString('pt-BR')}</span>
+          <span className="font-bold text-green-600">R$ {amount.toLocaleString('pt-BR')}</span>
         </label>
         <input
           type="range"
@@ -44,7 +44,7 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
           max="50000"
           step="500"
           {...register('amount', { valueAsNumber: true })}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
         />
         <div className="flex justify-between text-xs text-gray-500">
           <span>R$ 1.000</span>
@@ -66,12 +66,12 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
         </select>
       </div>
 
-      <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 space-y-1">
-        <p className="text-xs text-blue-600 font-medium">Estimativa de parcela:</p>
-        <p className="text-2xl font-bold text-blue-700">
+      <div className="bg-green-50 p-4 rounded-xl border border-green-100 space-y-1">
+        <p className="text-xs text-green-600 font-medium">Estimativa de parcela:</p>
+        <p className="text-2xl font-bold text-green-700">
           {installments}x de R$ {installmentValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </p>
-        <p className="text-[10px] text-blue-500">*Taxas inclusas (CET: 1.5% a.m.)</p>
+        <p className="text-[10px] text-green-500">*Taxas inclusas (CET: 1.5% a.m.)</p>
       </div>
 
       <div className="space-y-2">
@@ -96,7 +96,7 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
         </button>
         <button
           type="submit"
-          className="flex-[2] bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors"
+          className="flex-[2] bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors"
         >
           Ver Resultado
         </button>

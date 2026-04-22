@@ -66,7 +66,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-4">
-        <Loader2 className="animate-spin text-blue-600 w-10 h-10" />
+        <Loader2 className="animate-spin text-green-600 w-10 h-10" />
         <p className="text-gray-500 font-medium">Gerando QR Code PIX...</p>
       </div>
     );
@@ -77,7 +77,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
       <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
         <AlertCircle className="text-red-500 w-12 h-12" />
         <p className="text-gray-800 font-medium">{error}</p>
-        <button onClick={() => window.location.reload()} className="text-blue-600 underline">Tentar novamente</button>
+        <button onClick={() => window.location.reload()} className="text-green-600 underline">Tentar novamente</button>
       </div>
     );
   }
@@ -116,15 +116,15 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
         <button
           onClick={handleCheckStatus}
           disabled={statusLoading}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all"
+          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all"
         >
           {statusLoading ? <Loader2 className="animate-spin" /> : <QrCode size={20} />}
           Verificar Pagamento
         </button>
 
-        <div className="flex items-start gap-2 bg-blue-50 p-4 rounded-xl text-left">
-          <AlertCircle className="text-blue-600 shrink-0" size={18} />
-          <p className="text-xs text-blue-800 leading-relaxed">
+        <div className="flex items-start gap-2 bg-green-50 p-4 rounded-xl text-left">
+          <AlertCircle className="text-green-600 shrink-0" size={18} />
+          <p className="text-xs text-green-800 leading-relaxed">
             Assim que o contrato for firmado (após o pagamento), você será redirecionado ao WhatsApp do financeiro para receber o valor do empréstimo em sua conta.
           </p>
         </div>
