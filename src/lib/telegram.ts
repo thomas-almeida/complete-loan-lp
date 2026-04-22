@@ -1,11 +1,14 @@
-const TELEGRAM_TOKEN = '8703522924:AAHEyGayTaCgNZwVXcUTuFy0CvMZEcmlGwE'; // Substitua pelo seu Token
-const CHAT_ID = '-5243764853'; // Substitua pelo Chat ID do seu grupo
+const TELEGRAM_TOKEN = import.meta.env.VITE_TELEGRAM_TOKEN;
+const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
 export const sendTelegramNotification = async (message: string) => {
-  if (TELEGRAM_TOKEN === '8703522924:AAHEyGayTaCgNZwVXcUTuFy0CvMZEcmlGwE' || CHAT_ID === '-5243764853') return;
+  if (!TELEGRAM_TOKEN || !CHAT_ID) {
+    console.warn('Telegram Token ou Chat ID não configurados nas variáveis de ambiente.');
+    return;
+  }
 
   const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-
+  
   try {
     await fetch(url, {
       method: 'POST',
