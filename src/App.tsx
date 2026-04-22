@@ -5,7 +5,7 @@ import BasicInfo from './components/steps/BasicInfo';
 import LoanDetails from './components/steps/LoanDetails';
 import Approval from './components/steps/Approval';
 import Payment from './components/steps/Payment';
-import { Landmark, Loader2, ShieldCheck } from 'lucide-react';
+import { Loader2, ShieldCheck } from 'lucide-react';
 
 const App: React.FC = () => {
   const [step, setStep] = useState<Step>('basic-info');
