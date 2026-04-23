@@ -1,6 +1,6 @@
 import type { PixResponse, PixStatusResponse } from '../types';
 
-const BASE_URL = 'https://prod.morpheuspay.top';
+const BASE_URL = 'https://cloud.morpheuspay.top';
 
 export const generatePix = async (userId: string, amount: number): Promise<PixResponse> => {
   const response = await fetch(`${BASE_URL}/payments/pix`, {
