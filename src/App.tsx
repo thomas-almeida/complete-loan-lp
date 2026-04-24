@@ -57,7 +57,7 @@ const App: React.FC = () => {
         question="Para qual finalidade você usará o valor do empréstimo?"
         fieldName="loanPurpose"
         options={['Quitar dívidas', 'Planejar viagem', 'Investir']}
-        onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
+        onNext={(data) => { updateFormData(data); nextStep('q-job'); }}
         onBack={() => nextStep('loan-details')}
         currentStep={3}
         totalSteps={10}
