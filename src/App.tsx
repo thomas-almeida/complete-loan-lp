@@ -60,7 +60,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
         onBack={() => nextStep('loan-details')}
         currentStep={3}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -73,7 +73,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
         onBack={() => nextStep('q-purpose')}
         currentStep={4}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -84,9 +84,9 @@ const App: React.FC = () => {
         fieldName="isNegative"
         options={['Sim, infelizmente', 'Não, meu nome está em ordem']}
         onNext={(data) => { updateFormData(data); nextStep('q-family'); }}
-        onBack={() => nextStep('q-purpose')}
-        currentStep={4}
-        totalSteps={9}
+        onBack={() => nextStep('q-job')}
+        currentStep={5}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -99,7 +99,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-income'); }}
         onBack={() => nextStep('q-negative')}
         currentStep={5}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -112,7 +112,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-sacrifices'); }}
         onBack={() => nextStep('q-family')}
         currentStep={6}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -125,7 +125,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-conflicts'); }}
         onBack={() => nextStep('q-income')}
         currentStep={7}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -138,7 +138,7 @@ const App: React.FC = () => {
         onNext={(data) => { updateFormData(data); nextStep('q-trust'); }}
         onBack={() => nextStep('q-sacrifices')}
         currentStep={8}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
@@ -151,7 +151,7 @@ const App: React.FC = () => {
         onNext={handleLastQuestionSubmit}
         onBack={() => nextStep('q-conflicts')}
         currentStep={9}
-        totalSteps={9}
+        totalSteps={10}
         initialData={formData}
       />,
     },
