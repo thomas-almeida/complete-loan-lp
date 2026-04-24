@@ -6,6 +6,7 @@ export interface LoanFormData {
   installments: number;
   pixKey: string;
   // Novas perguntas
+  incomeRange: string;
   loanPurpose: string;
   isNegative: string;
   helpFamily: string;

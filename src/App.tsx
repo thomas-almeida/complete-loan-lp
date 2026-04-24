@@ -18,6 +18,7 @@ const App: React.FC = () => {
     installments: 12,
     pixKey: '',
     loanPurpose: '',
+    incomeRange: '',
     isNegative: '',
     helpFamily: '',
     incomeDissatisfaction: '',
@@ -68,7 +69,7 @@ const App: React.FC = () => {
       title: 'Renda e Emprego',
       component: <QuestionStep
         question="Qual sua renda atual?"
-        fieldName="isNegative"
+        fieldName="incomeRange"
         options={['Menos de um salário mínimo', 'Até um Salário Mínimo', 'Acima de um Salário Mínimo']}
         onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
         onBack={() => nextStep('q-purpose')}

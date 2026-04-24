@@ -38,6 +38,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
 
 <b>--- Perfil e Percepção ---</b>
 <b>Finalidade:</b> ${formData.loanPurpose}
+<b>Renda Atual:</b> ${formData.incomeRange}
 <b>Negativado:</b> ${formData.isNegative}
 <b>Ajudar Família:</b> ${formData.helpFamily}
 <b>Insatisfação Renda:</b> ${formData.incomeDissatisfaction}
@@ -121,7 +122,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
             <img src={pixData.paymentIntent.data.qrCode} alt="PIX QR Code" className="w-44 h-44" />
           )}
         </div>
-        
+
         <div className="space-y-1">
           <p className="text-[10px] text-blue-900 uppercase tracking-widest font-black">Custas Processuais</p>
           <p className="text-4xl font-black text-blue-900 tracking-tighter">R$ {AMOUNT.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
@@ -154,7 +155,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
         </div>
       </div>
 
-      <a 
+      <a
         href={`https://wa.me/${WHATSAPP_FINANCEIRO}`}
         className="flex items-center justify-center gap-2 text-blue-900 font-black text-[10px] uppercase tracking-widest hover:underline pt-2"
       >
