@@ -64,6 +64,19 @@ const App: React.FC = () => {
         initialData={formData}
       />,
     },
+    'q-job': {
+      title: 'Renda e Emprego',
+      component: <QuestionStep
+        question="Qual sua renda atual?"
+        fieldName="isNegative"
+        options={['Menos de um salário mínimo', 'Até um Salário Mínimo', 'Acima de um Salário Mínimo']}
+        onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
+        onBack={() => nextStep('q-purpose')}
+        currentStep={4}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
     'q-negative': {
       title: 'Situação do Nome',
       component: <QuestionStep

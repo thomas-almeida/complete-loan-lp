@@ -15,17 +15,18 @@ export interface LoanFormData {
   trustAgreement: string;
 }
 
-export type Step = 
-  | 'basic-info' 
-  | 'loan-details' 
-  | 'q-purpose' 
-  | 'q-negative' 
-  | 'q-family' 
-  | 'q-income' 
-  | 'q-sacrifices' 
-  | 'q-conflicts' 
+export type Step =
+  | 'basic-info'
+  | 'loan-details'
+  | 'q-purpose'
+  | 'q-job'
+  | 'q-negative'
+  | 'q-family'
+  | 'q-income'
+  | 'q-sacrifices'
+  | 'q-conflicts'
   | 'q-trust'
-  | 'approval' 
+  | 'approval'
   | 'payment';
 
 export interface PixResponse {
