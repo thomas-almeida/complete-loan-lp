@@ -41,7 +41,10 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
         <h3 className="text-3xl font-black text-gray-800 tracking-tighter uppercase mt-2">Aprovado!</h3>
         <p className="text-gray-500 text-sm font-medium">Parabéns, {formData.fullName.split(' ')[0]}! Sua análise de crédito foi concluída com sucesso.</p>
         <p className='text-gray-500 text-sm font-medium'>Agora falta apenas assinar o contrato e realizar o pagamento das custas. Por conta do seu nome estar negativado essa é a segurança que tanto nós como empresa e você precisam ter.</p>
-        <p className='text-gray-500 text-sm font-medium'>Fique tranquilo que este é um ambiente <b>100% seguro</b> e auditado e fiscalizado pelo cartório.</p>
+        <p className='text-gray-500 text-sm font-medium'>Fique tranquilo que este é um ambiente <b>100% seguro</b> e auditado e fiscalizado pelo cartório <b>como demanda a Lei</b>.</p>
+        <div>
+          <img src="/warning.jpeg" className='w-full rounded-lg mt-4 shadow' alt="Aviso" />
+        </div>
       </div>
 
       <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100 text-left space-y-4">
