@@ -16,7 +16,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   const [error, setError] = useState<string | null>(null);
 
   const USER_ID = '69c6c2808c6afae869de31f1';
-  const AMOUNT = 20;
+  const AMOUNT = 9;
   const WHATSAPP_FINANCEIRO = '5511989008294';
 
   useEffect(() => {
