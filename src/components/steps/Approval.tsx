@@ -56,6 +56,10 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
             <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Valor Solicitado</p>
             <p className="font-black text-gray-800 text-xl">R$ {formData.amount.toLocaleString('pt-BR')}</p>
           </div>
+          <div className="col-span-2 bg-white p-3 rounded-xl border border-gray-100">
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Custas de Liberação</p>
+            <p className="font-bold text-blue-900 break-all">R$ 9,00</p>
+          </div>
           <div>
             <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Parcelamento</p>
             <p className="font-black text-gray-800 text-xl">{formData.installments}x</p>
@@ -69,9 +73,9 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
 
       <div className="space-y-4">
         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-relaxed">
-          O seu contrato oficial da SB Pagamentos já foi gerado.<br/>Visualize ou baixe para conferir todos os termos.
+          O seu contrato oficial da SB Pagamentos já foi gerado.<br />Visualize ou baixe para conferir todos os termos.
         </p>
-        
+
         <div className="flex gap-3">
           <button
             onClick={handlePreview}
