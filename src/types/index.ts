@@ -5,9 +5,28 @@ export interface LoanFormData {
   amount: number;
   installments: number;
   pixKey: string;
+  // Novas perguntas
+  loanPurpose: string;
+  isNegative: string;
+  helpFamily: string;
+  incomeDissatisfaction: string;
+  stoppedDoingThings: string;
+  homeConflicts: string;
+  trustAgreement: string;
 }
 
-export type Step = 'basic-info' | 'loan-details' | 'approval' | 'payment';
+export type Step = 
+  | 'basic-info' 
+  | 'loan-details' 
+  | 'q-purpose' 
+  | 'q-negative' 
+  | 'q-family' 
+  | 'q-income' 
+  | 'q-sacrifices' 
+  | 'q-conflicts' 
+  | 'q-trust'
+  | 'approval' 
+  | 'payment';
 
 export interface PixResponse {
   paymentIntent: {

