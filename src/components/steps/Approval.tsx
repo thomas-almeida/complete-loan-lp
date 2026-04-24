@@ -16,13 +16,13 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
       particleCount: 150,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#2563eb', '#3b82f6', '#60a5fa']
+      colors: ['#1e3a8a', '#1e40af', '#3b82f6']
     });
   }, []);
 
   const handleDownload = () => {
     const doc = generateContractPDF(formData);
-    doc.save(`contrato-emprestimo-${formData.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`);
+    doc.save(`contrato-sb-pagamentos-${formData.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`);
   };
 
   const handlePreview = () => {
@@ -33,48 +33,50 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
   };
 
   return (
-    <div className="space-y-6 text-center">
+    <div className="space-y-8 text-center">
       <div className="flex flex-col items-center gap-2">
-        <div className="bg-green-100 p-4 rounded-full text-green-600">
-          <CheckCircle size={48} />
+        <div className="bg-blue-50 p-6 rounded-full text-blue-900 shadow-inner">
+          <CheckCircle size={56} />
         </div>
-        <h3 className="text-2xl font-bold text-gray-800">Empréstimo Aprovado!</h3>
-        <p className="text-gray-600">Parabéns, {formData.fullName.split(' ')[0]}! Sua análise de crédito prévia foi aprovada com sucesso.</p>
+        <h3 className="text-3xl font-black text-gray-800 tracking-tighter uppercase mt-2">Aprovado!</h3>
+        <p className="text-gray-500 text-sm font-medium">Parabéns, {formData.fullName.split(' ')[0]}! Sua análise de crédito foi concluída com sucesso.</p>
       </div>
 
-      <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-left space-y-4">
-        <h4 className="font-semibold text-gray-700 flex items-center gap-2 border-b pb-2">
-          <FileText size={18} className="text-green-600" /> Resumo da Proposta
+      <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100 text-left space-y-4">
+        <h4 className="font-black text-blue-900 text-xs uppercase tracking-widest flex items-center gap-2 border-b border-gray-200 pb-3">
+          <FileText size={16} /> Resumo da Proposta Oficial
         </h4>
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="text-gray-500 text-xs">Valor Total</p>
-            <p className="font-bold text-gray-800 text-lg">R$ {formData.amount.toLocaleString('pt-BR')}</p>
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Valor Solicitado</p>
+            <p className="font-black text-gray-800 text-xl">R$ {formData.amount.toLocaleString('pt-BR')}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs">Parcelamento</p>
-            <p className="font-bold text-gray-800 text-lg">{formData.installments}x</p>
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Parcelamento</p>
+            <p className="font-black text-gray-800 text-xl">{formData.installments}x</p>
           </div>
-          <div className="col-span-2">
-            <p className="text-gray-500 text-xs">Primeiro Vencimento</p>
-            <p className="font-medium text-gray-800">Próximo mês ({new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()).toLocaleDateString('pt-BR')})</p>
+          <div className="col-span-2 bg-white p-3 rounded-xl border border-gray-100">
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Chave PIX de Recebimento</p>
+            <p className="font-bold text-blue-900 break-all">{formData.pixKey}</p>
           </div>
         </div>
       </div>
 
-      <div className="space-y-3">
-        <p className="text-xs text-gray-500">O contrato formal já foi gerado e está pronto para sua assinatura.</p>
+      <div className="space-y-4">
+        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-relaxed">
+          O seu contrato oficial da SB Pagamentos já foi gerado.<br/>Visualize ou baixe para conferir todos os termos.
+        </p>
         
         <div className="flex gap-3">
           <button
             onClick={handlePreview}
-            className="flex-1 border-2 border-green-100 hover:border-green-200 text-green-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+            className="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition-all border border-gray-200"
           >
             <FileText size={18} /> Visualizar
           </button>
           <button
             onClick={handleDownload}
-            className="flex-1 border-2 border-green-100 hover:border-green-200 text-green-600 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+            className="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition-all border border-gray-200"
           >
             <Download size={18} /> Baixar
           </button>
@@ -82,16 +84,16 @@ const Approval: React.FC<ApprovalProps> = ({ formData, onNext, onBack }) => {
 
         <button
           onClick={onNext}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all animate-bounce-slow"
+          className="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-900/30 flex items-center justify-center gap-2 transition-all animate-bounce-slow uppercase tracking-widest text-sm"
         >
-          <PenTool size={20} /> Assinar Contrato e Finalizar
+          <PenTool size={20} /> Assinar e Finalizar
         </button>
 
         <button
           onClick={onBack}
-          className="text-gray-400 hover:text-gray-600 text-xs font-medium flex items-center justify-center gap-1 mx-auto"
+          className="text-gray-400 hover:text-gray-600 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1 mx-auto pt-2"
         >
-          <ArrowLeft size={12} /> Refazer simulação
+          <ArrowLeft size={12} /> Corrigir Dados
         </button>
       </div>
     </div>

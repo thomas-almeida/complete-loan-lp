@@ -32,14 +32,14 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
   return (
     <form onSubmit={handleSubmit(onNext)} className="space-y-6">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-green-600 bg-green-50 px-2 py-1 rounded">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-blue-900 bg-blue-50 px-2 py-1 rounded">
           Passo {currentStep} de {totalSteps}
         </span>
         <div className="flex gap-1">
           {Array.from({ length: totalSteps }).map((_, i) => (
             <div 
               key={i} 
-              className={`h-1 w-4 rounded-full ${i + 1 <= currentStep ? 'bg-green-500' : 'bg-gray-100'}`}
+              className={`h-1 w-4 rounded-full ${i + 1 <= currentStep ? 'bg-blue-900' : 'bg-gray-100'}`}
             />
           ))}
         </div>
@@ -54,16 +54,16 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
           {options.map((opt) => (
             <label 
               key={opt} 
-              className="group flex items-center gap-3 p-4 border-2 border-gray-100 rounded-2xl hover:border-green-500 hover:bg-green-50 cursor-pointer transition-all active:scale-[0.98]"
+              className="group flex items-center gap-3 p-4 border-2 border-gray-100 rounded-2xl hover:border-blue-900 hover:bg-blue-50 cursor-pointer transition-all active:scale-[0.98]"
             >
               <input 
                 type="radio" 
                 {...register(fieldName as any)} 
                 value={opt} 
                 required 
-                className="w-5 h-5 text-green-600 border-gray-300 focus:ring-green-500" 
+                className="w-5 h-5 text-blue-900 border-gray-300 focus:ring-blue-900" 
               />
-              <span className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">
+              <span className="text-sm font-medium text-gray-700 group-hover:text-blue-900 transition-colors">
                 {opt}
               </span>
             </label>
@@ -81,7 +81,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
         </button>
         <button
           type="submit"
-          className="flex-[3] bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-green-200 transition-all flex items-center justify-center gap-2"
+          className="flex-[3] bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2"
         >
           Continuar <ChevronRight size={18} />
         </button>

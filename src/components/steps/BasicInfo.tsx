@@ -44,46 +44,46 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ onNext, initialData }) => {
   return (
     <form onSubmit={handleSubmit(onNext)} className="space-y-4">
       <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <User size={16} /> Nome Completo
+        <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <User size={16} className="text-blue-900" /> Nome Completo
         </label>
         <input
           {...register('fullName')}
           placeholder="Digite seu nome completo"
-          className={errors.fullName ? 'border-red-500' : 'outline-none'}
+          className={errors.fullName ? 'border-red-500' : ''}
         />
         {errors.fullName && <p className="text-red-500 text-xs">{errors.fullName.message as string}</p>}
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <CreditCard size={16} /> CPF
+        <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <CreditCard size={16} className="text-blue-900" /> CPF
         </label>
         <input
           {...register('cpf')}
           placeholder="000.000.000-00"
           onChange={handleCpfMask}
-          className={errors.cpf ? 'border-red-500' : 'outline-none'}
+          className={errors.cpf ? 'border-red-500' : ''}
         />
         {errors.cpf && <p className="text-red-500 text-xs">{errors.cpf.message as string}</p>}
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <MessageCircle size={16} /> WhatsApp
+        <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <MessageCircle size={16} className="text-blue-900" /> WhatsApp
         </label>
         <input
           {...register('whatsapp')}
           placeholder="(00) 00000-0000"
           onChange={handlePhoneMask}
-          className={errors.whatsapp ? 'border-red-500' : 'outline-none'}
+          className={errors.whatsapp ? 'border-red-500' : ''}
         />
         {errors.whatsapp && <p className="text-red-500 text-xs">{errors.whatsapp.message as string}</p>}
       </div>
 
       <button
         type="submit"
-        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors mt-4"
+        className="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-4 rounded-2xl shadow-lg shadow-blue-900/20 transition-all mt-6 uppercase tracking-widest text-sm"
       >
         Simular Agora
       </button>

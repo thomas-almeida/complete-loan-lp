@@ -29,14 +29,14 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
 
   const amount = watch('amount');
   const installments = watch('installments');
-  const installmentValue = (amount / installments * 1.05); // 5% monthly fee
+  const installmentValue = (amount / installments * 1.10); // 10% monthly fee example
 
   return (
-    <form onSubmit={handleSubmit(onNext)} className="space-y-4">
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex justify-between">
-          <span className="flex items-center gap-2"><DollarSign size={16} /> Valor Pretendido</span>
-          <span className="font-bold text-green-600">R$ {amount.toLocaleString('pt-BR')}</span>
+    <form onSubmit={handleSubmit(onNext)} className="space-y-6">
+      <div className="space-y-3">
+        <label className="text-sm font-bold text-gray-700 flex justify-between">
+          <span className="flex items-center gap-2"><DollarSign size={16} className="text-blue-900" /> Valor Desejado</span>
+          <span className="font-black text-blue-900 text-lg">R$ {amount.toLocaleString('pt-BR')}</span>
         </label>
         <input
           type="range"
@@ -44,21 +44,21 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
           max="50000"
           step="500"
           {...register('amount', { valueAsNumber: true })}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
+          className="w-full h-2 bg-gray-100 rounded-full appearance-none cursor-pointer accent-blue-900"
         />
-        <div className="flex justify-between text-xs text-gray-500">
+        <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase tracking-widest">
           <span>R$ 1.000</span>
           <span>R$ 50.000</span>
         </div>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <Calendar size={16} /> Parcelas
+      <div className="space-y-3">
+        <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
+          <Calendar size={16} className="text-blue-900" /> Número de Parcelas
         </label>
         <select
           {...register('installments', { valueAsNumber: true })}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 outline-none"
+          className="w-full"
         >
           {Array.from({ length: 24 }, (_, i) => i + 1).map((n) => (
             <option key={n} value={n}>{n}x</option>
@@ -66,37 +66,37 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({ onNext, onBack, initialData }
         </select>
       </div>
 
-      <div className="bg-green-50 p-4 rounded-xl border border-green-100 space-y-1">
-        <p className="text-xs text-green-600 font-medium">Estimativa de parcela:</p>
-        <p className="text-2xl font-bold text-green-700">
+      <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100 space-y-1 text-center">
+        <p className="text-[10px] text-blue-900 font-black uppercase tracking-widest">Valor da parcela mensal:</p>
+        <p className="text-3xl font-black text-blue-900">
           {installments}x de R$ {installmentValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </p>
-        <p className="text-[10px] text-green-500">*Taxas inclusas (CET: 1.5% a.m.)</p>
+        <p className="text-[10px] text-blue-400 font-bold uppercase mt-2">Liberação Imediata via PIX</p>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-          <QrCode size={16} /> Chave PIX (Para receber o valor)
+      <div className="space-y-3">
+        <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
+          <QrCode size={16} className="text-blue-900" /> Sua Chave PIX (Para Recebimento)
         </label>
         <input
           {...register('pixKey')}
-          placeholder="CPF, E-mail, Celular ou Chave Aleatória"
-          className={errors.pixKey ? 'border-red-500' : 'outline-none'}
+          placeholder="CPF, E-mail ou Celular"
+          className={errors.pixKey ? 'border-red-500' : ''}
         />
         {errors.pixKey && <p className="text-red-500 text-xs">{errors.pixKey.message as string}</p>}
       </div>
 
-      <div className="flex gap-3 mt-4">
+      <div className="flex gap-3 pt-4">
         <button
           type="button"
           onClick={onBack}
-          className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+          className="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-500 font-bold py-4 rounded-2xl transition-colors flex items-center justify-center gap-2"
         >
-          <ArrowLeft size={18} /> Voltar
+          <ArrowLeft size={18} />
         </button>
         <button
           type="submit"
-          className="flex-[2] bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg transition-colors"
+          className="flex-[3] bg-blue-900 hover:bg-blue-800 text-white font-black py-4 rounded-2xl shadow-lg shadow-blue-900/20 transition-all uppercase tracking-widest text-sm"
         >
           Ver Resultado
         </button>

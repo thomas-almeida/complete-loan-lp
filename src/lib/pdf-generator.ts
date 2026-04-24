@@ -9,7 +9,7 @@ export const generateContractPDF = (data: LoanFormData) => {
   const contractNumber = `SBP-${date.getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`;
   
   // Cores e Estilos
-  const primaryGreen = '#16a34a';
+  const primaryBlue = '#1e3a8a'; // Azul Escuro Profissional
   const textDark = '#1f2937';
   const textGray = '#6b7280';
   const margin = 20;
@@ -24,7 +24,7 @@ export const generateContractPDF = (data: LoanFormData) => {
   };
 
   // --- CABEÇALHO ---
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   doc.setFontSize(22);
   doc.setFont('helvetica', 'bold');
   doc.text('SB Pagamentos', margin, 25);
@@ -44,7 +44,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- PARTES ---
   let y = 70;
-  doc.setDrawColor(primaryGreen);
+  doc.setDrawColor(primaryBlue);
   doc.setLineWidth(1);
   doc.line(margin, y, margin, y + 35); // Linha vertical decorativa
 
@@ -70,7 +70,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- CLÁUSULA 1 ---
   y += 25;
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 1ª – OBJETO', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
@@ -80,7 +80,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- CLÁUSULA 2 ---
   y += 25;
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 2ª – CONDIÇÕES DE PAGAMENTO', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
@@ -119,7 +119,7 @@ export const generateContractPDF = (data: LoanFormData) => {
   y = 30;
 
   // --- CLÁUSULA 3 ---
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 3ª – MORA E MULTA', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
@@ -128,7 +128,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- CLÁUSULA 4 ---
   y += 25;
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 4ª – VENCIMENTO ANTECIPADO', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
@@ -137,7 +137,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- CLÁUSULA 5 ---
   y += 25;
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 5ª – DISPOSIÇÕES GERAIS', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
@@ -146,7 +146,7 @@ export const generateContractPDF = (data: LoanFormData) => {
 
   // --- CLÁUSULA 6 ---
   y += 25;
-  doc.setTextColor(primaryGreen);
+  doc.setTextColor(primaryBlue);
   boldText('CLÁUSULA 6ª – FORO', margin, y, 12);
   doc.setTextColor(textDark);
   y += 8;
